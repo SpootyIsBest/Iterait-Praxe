@@ -1,5 +1,5 @@
 
-# This is test file for: git add
+# This is test file for: git commands
 
 # cube
 for i in range(5):
