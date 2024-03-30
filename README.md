@@ -1,3 +1,1 @@
 # Iterait-Praxe
-
-# Hello Word

@@ -1,0 +1,15 @@
+services:
+  database:
+    container_name: postgres_c
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=test
+    ports:
+      - "8000:5432"
+    volumes:
+      - ps_data:/var/lib/data
+volumes:
+  ps_data:
