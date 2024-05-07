@@ -3,8 +3,8 @@ select *
 	order by countrycode
 
 select *
-	from country   
-	Where name like 'U%' 
+	from city 
+	Where countrycode like 'U__' 
 	
 select *
 	from city 
@@ -28,8 +28,8 @@ select c.headofstate, count(c.headofstate)
 
 select name as country, lifeexpectancy
 	from country 
-	where lifeexpectancy is not null and population < 10000000
-	order by lifeexpectancy desc
+	group by country, population , lifeexpectancy 
+	having population > 10000000
 	limit 10
 	
 select c.continent, count(c.code) as num_countries
@@ -44,15 +44,10 @@ select cl.countrycode, c.name ,cl.language
 	from countrylanguage cl join country c on cl.countrycode = c.code
 	where cl.language = 'English'
 
-select name, c.population
+select name, max(c.population)
 	from country c 
 	where c.population = (select max(c.population) from country c)
-	group by name, c.population 
-	
-	
-	
-
-	
+	group by name
 	
 	
 	
