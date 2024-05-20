@@ -47,7 +47,7 @@ select cl.countrycode, c.name ,cl.language
 select name, c.population
 	from country c 
 	where c.population = (select max(c.population) from country c)
-	group by name, c.population 
+	 
 	
 	
 	

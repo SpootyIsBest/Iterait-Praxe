@@ -1,0 +1,27 @@
+services:
+  database1:
+    container_name: db1
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=test-db1
+    ports:
+      - "8010:5432"
+    volumes:
+      - test-db1:/var/lib/
+  database2:
+    container_name: db2
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=test-db2
+    ports:
+      - "8011:5432"
+    volumes:
+      - test-db2:/var/lib/
+volumes:
+  test-db2:

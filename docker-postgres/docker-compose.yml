@@ -1,14 +1,13 @@
 services:
   database:
-    container_name: postgres_c
+    container_name: postgres_test1
     image: postgres
     restart: always
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=test
     ports:
-      - "8000:5432"
+      - "8003:5432"
     volumes:
       - ps_data:/var/lib/data
 volumes:
