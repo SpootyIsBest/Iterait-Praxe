@@ -1,0 +1,45 @@
+services:
+  postgres_primary:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 8010:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256\nhost replication all 0.0.0.0/0 md5"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    command: |
+      postgres 
+      -c wal_level=replica 
+      -c hot_standby=on 
+      -c max_wal_senders=10 
+      -c max_replication_slots=10 
+      -c hot_standby_feedback=on
+    volumes:
+      - test-db1:/var/lib/postgresql/data/
+    networks:
+      - replication
+
+  postgres_replica:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 8020:5432
+    environment:
+      PGUSER: root
+      PGPASSWORD: root
+    command: |
+      sleep 1000000000
+    volumes:
+      - test-db2:/var/lib/postgresql/data/
+    depends_on:
+      - postgres_primary
+    networks:
+      - replication
+volumes:
+  test-db2:
+  test-db1:
+networks:
+  replication:
